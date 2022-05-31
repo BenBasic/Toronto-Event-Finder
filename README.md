@@ -9,7 +9,13 @@
 - User wants to be able to view it in a way that will help him visualize route and area
 - User wants to be able to limit scope of search
 - A map of the location is displayed with a set radius of 2km
-- 
+
+
+## Task List
+1) Familiarize selves with API documentation for Tilequery API and MapBox API
+2) Perform successful fetch requests for both APIs to view data
+3) Use API data to populate page with location based information for healthy food within an area in Toronto
+4) Use local storage to allow users to view location based data based on previous area searches
 
 ## 📜Table of Contents
 - [Description](#description)
