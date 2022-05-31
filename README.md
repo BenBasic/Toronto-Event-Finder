@@ -21,7 +21,7 @@
 - [Description](#description)
 - [Images and Screenshots](#images-and-screenshots)
 - [Deployed Link](#deployed-Link)
-- [Wireframe](#wireframe)
+- [Wireframe](https://www.figma.com/file/RZhzRnK6eMB49M3BBlxbzu/Toronto-Healthy-Food-Finder?node-id=0%3A1)
 - [References](#References)
 ## 🖼️ Images and Screenshots
  ![WelcomePage](INSERT_LINK)
