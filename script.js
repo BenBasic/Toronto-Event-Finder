@@ -74,6 +74,7 @@ function getData() {
 })
 }
 
+// Calling the getData function
 getData();
 
 
