@@ -1,16 +1,18 @@
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
+const url = "http://data.streetfoodapp.com/1.1/locations/vancouver/vijs"; // site that doesn’t send Access-Control-*
+fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
+.then(response => response.json())
+.then(contents => console.log(contents))
+.catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
+
+
 apiKey = "ae6d8ad7-7180-4d04-9a45-cdcf2e70eeff";
 
-async function getUVIndex() {
-    UVIndexURL = "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=" + apiKey;
-    fetch(UVIndexURL, {
-        mode:'no-cors',
+function getUVIndex() {
+    let UVIndexURL = "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=" + apiKey;
+    let testURL = "https://cors-anywhere.herokuapp.com/";
+    fetch(testURL + UVIndexURL, {
         method: "get",
-        headers:{
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": true
-        }
-
     })
     .then( UVResponse => {
         return UVResponse.json();
@@ -24,31 +26,18 @@ async function getUVIndex() {
 getUVIndex();
 
 
-// const
-//     https = require("https"),
-//     packageId = "ae6d8ad7-7180-4d04-9a45-cdcf2e70eeff";
- 
-// // promise to retrieve the package
-// const getPackage = new Promise((resolve, reject) => {
-//     https.get(`https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=${packageId}`, (response) => {
-//         let dataChunks = [];
-//         response
-//             .on("data", (chunk) => {
-//                 dataChunks.push(chunk)
-//             })
-//             .on("end", () => {
-//                 let data = Buffer.concat(dataChunks)
-//                 resolve(JSON.parse(data.toString())["result"])
-//             })
-//             .on("error", (error) => {
-//                 reject(error)
-//             })
-//     });
-// });
- 
-// getPackage.then(pkg => {
-//     // this is the metadata of the package
-//     //console.log(pkg);
-// }).catch(error => {
-//     console.error(error);
-// })
+// function getUVIndex() {
+//     UVIndexURL = "http://data.streetfoodapp.com/1.1/locations/vancouver/vijs"
+//     fetch(UVIndexURL, {
+//         method: "get",
+//     })
+//     .then( UVResponse => {
+//         return UVResponse.json();
+//     })
+//     .then( UVData => {
+//         console.log(UVData);
+
+//     })
+// }
+
+// getUVIndex();
