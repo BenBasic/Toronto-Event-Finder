@@ -1,4 +1,6 @@
+// Assigning the apiKey variable to the API Key needed to access the data set
 let apiKey = "gPYdcAZ3x7dA2mYoq34XovsV4rz8IFvd"
+// Assigning querySize to the amount of events we want to pull from a page in the data set (currently the maximum value for the api is 1000 per page)
 let querySize = "50"
 
 // Function which grabs data from the ticket master api
