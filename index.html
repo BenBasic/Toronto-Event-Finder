@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' />
+</head>
+<h1>Andrews Wicked Cool Map Page V1</h1>
+
+<body>
+    <div id='map' style='width: 800px; height: 700px;'></div>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYmFsZGVteXIiLCJhIjoiY2wzdjA5eW91Mmc5cTNqb2Vvc3Jnbzh4MSJ9.v4t3sbjF4LHXCQ7AJy2I1Q';
+    var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/baldemyr/cl3wkzx5i000616jynj7r1g2a'
+    });
+    </script>    
+</body>
+</html>
