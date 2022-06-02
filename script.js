@@ -51,16 +51,19 @@ function getData() {
         console.log(dateCheck);
 
         let cancelledCheck = eventData[i].dates.status.code;
+        console.log(cancelledCheck);
 
         if (dateCheck, cancelledCheck === "onsale") {
             let latData = eventData[i]._embedded.venues[0].location.latitude;
             let lonData = eventData[i]._embedded.venues[0].location.longitude;
             let eventTitleData = eventData[i].name;
             let eventURL = eventData[i].url;
+            let vanueNameData = eventData[i]._embedded.venues[0].name;
 
 
-            console.log(latData + ":" + lonData);
             console.log("Title: " + eventTitleData);
+            console.log("Venue: " + vanueNameData);
+            console.log(latData + ":" + lonData);
             console.log("URL: " + eventURL);
         };
     }
