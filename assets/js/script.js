@@ -28,7 +28,7 @@ function getData() {
 		})
 		.then((data) => {
 			let events = [];
-
+			console.log(data);
 			// Variable for the current date
 			let currentDate = moment().format("YYYY-MM-DD");
 			// Variable for the start date for the dateCheck, days is subtracted by 1 so that the starting range can be checked for the current date
@@ -67,7 +67,7 @@ function getData() {
 					let eventURL = eventData[i].url;
 					// Assigning venueNameData to the value of the events data set venue name
 					let venueNameData = eventData[i]._embedded.venues[0].name;
-
+					let featureImage = eventData[i].images[0].url;
 					// Console logs to log the desired data of the data set for things such as the event title, the geo location of the event, etc
 
 					if (
@@ -82,6 +82,7 @@ function getData() {
 							lon: lonData,
 							title: eventTitleData,
 							url: eventURL,
+							featureImage: featureImage,
 						});
 					}
 				}
@@ -124,7 +125,7 @@ const startMapBox = async (events) => {
 		// Add the geocoder to the map
 		map.addControl(geocoder, "top-left"); // Add the search box to the top left
 
-		const marker = new mapboxgl.Marker({ color: "#008000" }); // Create a new green marke
+		const marker = new mapboxgl.Marker({ color: "#da373d" }); // Create a new green marke
 
 		// marker.setLngLat(point).addTo(map); // Add the marker to the map at the result coordinates
 
@@ -201,21 +202,23 @@ const startMapBox = async (events) => {
 			},
 		});
 		for (let i = 0; i < events.length; i++) {
-			const el = document.createElement("div");
-			el.className = "marker";
-
+			console.log(events[i].featureImage);
 			const maboxMarker = new mapboxgl.Marker({});
 
 			maboxMarker.setLngLat([events[i].lon, events[i].lat]);
 
 			maboxMarker.setPopup(
 				new mapboxgl.Popup({ offset: 25 }) // add popups
-					.setHTML(`<h3>${events[i].title}</h3><p>${events[i].url}</p>`)
+					.setHTML(
+						`<h3>${events[i].title}</h3>
+						<img src="${events[i].featureImage}">
+						<a href="${events[i].url}" target="_blank"> Book Now</a>`
+					)
 			);
 
 			maboxMarker.addTo(map);
 
-			console.log(maboxMarker);
+			// console.log(maboxMarker);
 		}
 	});
 };
