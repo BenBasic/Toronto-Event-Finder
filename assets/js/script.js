@@ -1,3 +1,5 @@
+let searchList = $("#previous-searches");
+
 // Assigning the apiKey variable to the API Key needed to access the data set
 let apiKey = "gPYdcAZ3x7dA2mYoq34XovsV4rz8IFvd"
 // Assigning querySize to the amount of events we want to pull from a page in the data set (currently the maximum value for the api is 1000 per page)
@@ -108,6 +110,37 @@ map.on("load", async () => {
 	});
 	// Add the geocoder to the map
 	map.addControl(geocoder, "top-left"); // Add the search box to the top left
+
+	console.log("test")
+	geocoder.on("result", (e) => {
+    function getAddressByType(value, index, array) {
+      if (value.id.match(/country.*/)) {
+       console.log(value.text)
+      } else if (value.id.match(/region.*/)) {
+       console.log(value.text)
+      } else if (value.id.match(/postcode.*/)) {
+       console.log(value.text)
+
+	   //Appends the searched items postal code to the list of previous searches
+	   let searchListItem = $("<h3>").html("Location: " + value.text).attr({"class": "uvi"});
+	   searchList.append(searchListItem);
+
+
+      } else if (value.id.match(/district.*/)) {
+       console.log(value.text)
+      } else if (value.id.match(/place.*/)) {
+          console.log(value.text)
+      } else if (value.id.match(/neighborhood.*/)) {
+            console.log(value.text)
+      } else if (value.id.match(/address.*/)) {
+            console.log(value.text)
+      } else if (value.id.match(/poi.*/)) {
+       console.log(value.text)
+      }
+    }
+    e.result.context.forEach(getAddressByType);
+    console.log(JSON.stringify(e))
+  });
 
 	const marker = new mapboxgl.Marker({ color: "#008000" }); // Create a new green marke
 
