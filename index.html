@@ -1,14 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset='utf-8' />
+    <title>Healthy food finder</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <!-- Import Mapbox GL JS -->
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel='stylesheet'
+        href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css'
+        type='text/css' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js'></script>
+    <script
+        src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700&family=Lato:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,700;1,800&family=Roboto:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <script src="tailwind.config.js"></script>
 </head>
-<body>
-    
+
+<body class="container mx-auto overflow-hidden">
+    <header class="py-2 group">
+        <nav
+            class="container drop-shadow-md mx-auto bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:to-red-100 py-4 px-2 rounded-xl overflow-hidden">
+            <a class="text-xl lg:text-2xl font-bold text-white group-hover:opacity-90 font-pop" href="#">Toronto
+                Event Finder</a>
+        </nav>
+    </header>
+
+    <div class="flex flex-col md:flex-row w-full lg:flex-nowrap">
+        <div class="flex-1 w-64 min-h-full flex-shrink-0 px-2">
+            <div class="w-full bg-white py-4 px-2 border-slate-300 border-width border border-solid rounded-md">
+                <h1 class="font-robot text-2xl font-bold text-cyan-700">Search Location</h1>
+
+            </div>
+        </div>
+        <div class="flex-1 w-full lg:w-auto min-h-[80vh] relative rounded-lg overflow-hidden  ">
+            <div class="" id='map'></div>
+        </div>
+
+
+    </div>
+
+
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="./script.js"></script>
+
+<script src="./assets/js/script.js"></script>
+
 </html>
