@@ -111,12 +111,7 @@ map.on("load", async () => {
 	// Add the geocoder to the map
 	map.addControl(geocoder, "top-left"); // Add the search box to the top left
 
-	// Center the map on the coordinates of clicked list item.
-	searchList.on('click', (e) => {
-		map.flyTo({
-		center: [-79.380319, 43.653982]
-		});
-	});
+
 
 
 	console.log("test")
@@ -126,13 +121,26 @@ map.on("load", async () => {
 	let locationTitle = results.result.text;
 	let lonLocation = results.result.geometry.coordinates[0];
 	let latLocation = results.result.geometry.coordinates[1];
-	//Appends the searched items postal code to the list of previous searches
-	let searchListItem = $("<h3>").html("Location: " + locationTitle + "/ latitude: " + latLocation + "/ longitude: " + lonLocation).attr({"class": "uvi"});
-	searchList.append(searchListItem);
+	let locationAddress = results.result.place_name;
 
-	console.log(results.result.geometry.coordinates[0]);
-	console.log(results.result.geometry.coordinates[1]);
-	console.log(results.result.text);
+	//Appends the searched items postal code to the list of previous searches
+	let searchListItem = $("<h3>").html(locationAddress).data({"lon": lonLocation, "lat": latLocation});
+	searchList.append(searchListItem);
+	console.log("checking stuff: " + searchListItem.data("lon") + " // " + searchListItem.data("lat"))
+	
+
+	// Center the map on the coordinates of clicked list item.
+	searchListItem.on('click', (e) => {
+		map.flyTo({
+		center: [searchListItem.data("lon"), searchListItem.data("lat")]
+		});
+	});
+
+	console.log(locationTitle);
+	console.log(lonLocation);
+	console.log(latLocation);
+	console.log(locationAddress);
+	
 
  })
 
