@@ -120,6 +120,7 @@ const startMapBox = async (events) => {
 			bbox: [-180, -90, 180, 90], // Set a bounding box (for Toronto, this is still be way too big/broad)
 			country: "CA", //Set the country for geocoding results
 		});
+
 		// Add the geocoder to the map
 		map.addControl(geocoder, "top-left"); // Add the search box to the top left
 
@@ -199,6 +200,23 @@ const startMapBox = async (events) => {
 				],
 			},
 		});
+		for (let i = 0; i < events.length; i++) {
+			const el = document.createElement("div");
+			el.className = "marker";
+
+			const maboxMarker = new mapboxgl.Marker({});
+
+			maboxMarker.setLngLat([events[i].lon, events[i].lat]);
+
+			maboxMarker.setPopup(
+				new mapboxgl.Popup({ offset: 25 }) // add popups
+					.setHTML(`<h3>${events[i].title}</h3><p>${events[i].url}</p>`)
+			);
+
+			maboxMarker.addTo(map);
+
+			console.log(maboxMarker);
+		}
 	});
 };
 
