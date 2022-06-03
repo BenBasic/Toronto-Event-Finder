@@ -111,36 +111,33 @@ map.on("load", async () => {
 	// Add the geocoder to the map
 	map.addControl(geocoder, "top-left"); // Add the search box to the top left
 
+	// Center the map on the coordinates of clicked list item.
+	searchList.on('click', (e) => {
+		map.flyTo({
+		center: [-79.380319, 43.653982]
+		});
+	});
+
+
 	console.log("test")
-	geocoder.on("result", (e) => {
-    function getAddressByType(value, index, array) {
-      if (value.id.match(/country.*/)) {
-       console.log(value.text)
-      } else if (value.id.match(/region.*/)) {
-       console.log(value.text)
-      } else if (value.id.match(/postcode.*/)) {
-       console.log(value.text)
 
-	   //Appends the searched items postal code to the list of previous searches
-	   let searchListItem = $("<h3>").html("Location: " + value.text).attr({"class": "uvi"});
-	   searchList.append(searchListItem);
+  geocoder.on('result', function(results) {
+
+	let locationTitle = results.result.text;
+	let lonLocation = results.result.geometry.coordinates[0];
+	let latLocation = results.result.geometry.coordinates[1];
+	//Appends the searched items postal code to the list of previous searches
+	let searchListItem = $("<h3>").html("Location: " + locationTitle + "/ latitude: " + latLocation + "/ longitude: " + lonLocation).attr({"class": "uvi"});
+	searchList.append(searchListItem);
+
+	console.log(results.result.geometry.coordinates[0]);
+	console.log(results.result.geometry.coordinates[1]);
+	console.log(results.result.text);
+
+ })
 
 
-      } else if (value.id.match(/district.*/)) {
-       console.log(value.text)
-      } else if (value.id.match(/place.*/)) {
-          console.log(value.text)
-      } else if (value.id.match(/neighborhood.*/)) {
-            console.log(value.text)
-      } else if (value.id.match(/address.*/)) {
-            console.log(value.text)
-      } else if (value.id.match(/poi.*/)) {
-       console.log(value.text)
-      }
-    }
-    e.result.context.forEach(getAddressByType);
-    console.log(JSON.stringify(e))
-  });
+
 
 	const marker = new mapboxgl.Marker({ color: "#008000" }); // Create a new green marke
 
