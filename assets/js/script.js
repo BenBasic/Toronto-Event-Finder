@@ -1,6 +1,9 @@
+// Assigning searchList variable to the previous-searches id within the html, this is where the list items will populate
 let searchList = $("#previous-searches");
+// Assigning searchStorage the value of whats currently stored in pastSearches local storage if it currently exists
 searchStorage = JSON.parse(localStorage.getItem("pastSearches"));
 
+// If statement checking if local storage = null, if it is then it assigns a null value to the pastSearches localStorage
 if (localStorage = null) {
 	localStorage.setItem("pastSearches", null);
 }
@@ -12,22 +15,27 @@ let apiKey = "gPYdcAZ3x7dA2mYoq34XovsV4rz8IFvd"
 let querySize = "50"
 
 
-	// Function which loads the past city searches to display when loading the page
+// Function which loads the past searches to display when loading the page
 function pastSearches() {
 
-	// If statement checking if the cities array is already populated
+	// If statement checking if searchStorage already has any value from the localStorage
 	if (searchStorage !== null) {
-		console.log(searchStorage);
+		// Removes all <h3> tags from the html document so that the past search list clears before being loaded in this function
 		$("h3").remove();
-		// For loop which will increment through the cities array to find each item inside of local storage
+		// For loop which will increment through the search storage array to find each item inside of local storage
 		for (let i = 0; i < searchStorage.length; i++) {
-			// Assigning historyBtn a JQuery and text to match the city name of the cities inside of the cities array
+			// Assigning searchListItem a JQuery with a data value object with the properties for address, longitude, and latitude for each item in the localStorage
 			let searchListItem = $('<h3>').data({"address": searchStorage[i].address, "lon": searchStorage[i].lon, "lat": searchStorage[i].lat});
+			// Assigning the text which will display on the list for the populated list item
 			searchListItem.text(searchStorage[i].address);
-			// Appending historyBtn to the search history list in the index.html
+			// Appending searchListItem to the searchList (#previous-searches) in the index.html
 			searchList.append(searchListItem);
+
+			// Assigning each searchListItem the ability to be clicked on to re-center the map based on its longitude and latitude
 			searchListItem.on('click', (e) => {
+				// Makes the map re-center on a location
 				map.flyTo({
+				// Assigning the center value to the longitude and latitude of the data within searchListItem
 				center: [searchListItem.data("lon"), searchListItem.data("lat")]
 				});
 			});
@@ -35,8 +43,10 @@ function pastSearches() {
 		// Exits the for loop
 		return;
 		}
+	// Assigning searchStorage to an empty array to avoid breaking the program if it detects a null value
 	searchStorage = [];
 }
+// Calls pastSearches function to load past searches and append them to the searchList
 pastSearches();
 
 
@@ -148,42 +158,24 @@ map.on("load", async () => {
 
 
 
+	// Once the map loads a search result, it will assign values to local storage 
+	geocoder.on('result', function(results) {
 
-	console.log("test")
-
-  geocoder.on('result', function(results) {
-
+	// Assigning variables to data within the mapbox api dataset
 	let locationTitle = results.result.text;
 	let lonLocation = results.result.geometry.coordinates[0];
 	let latLocation = results.result.geometry.coordinates[1];
 	let locationAddress = results.result.place_name;
 
-	//Appends the searched items postal code to the list of previous searches
-		searchListItem = $("<h3>").html(locationAddress).data({"lon": lonLocation, "lat": latLocation});
-
-	console.log("checking stuff: " + searchListItem.data("lon") + " // " + searchListItem.data("lat"))
+	//DONT REMOVE THIS!!! Honestly not sure why, but without this line, the program will not add anything to localStorage
+	searchListItem = $("<h3>").html(locationAddress).data({"lon": lonLocation, "lat": latLocation});
 	
-
-
-	
-
-	
+	// Pushes search location data to the searchStorage array in localStorage
 	searchStorage.push({'address': locationAddress, 'lon': lonLocation, "lat": latLocation});
+	// Stringifies the data pushed to local storage, required for program to properly parse the data when running pastSearches function
 	localStorage.setItem("pastSearches", JSON.stringify(searchStorage));
+	// Calls pastSearches function to reload the past search listItems so that the new search can be added to the past searches list
 	pastSearches();
-
-	
-	console.log(searchStorage);
-	// Center the map on the coordinates of clicked list item.
-
-	
-
-	console.log(locationTitle);
-	console.log(lonLocation);
-	console.log(latLocation);
-	console.log(locationAddress);
-	
-
  })
 
 
