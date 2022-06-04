@@ -129,12 +129,19 @@ map.on("load", async () => {
 	console.log("checking stuff: " + searchListItem.data("lon") + " // " + searchListItem.data("lat"))
 	
 
+	
+	let searchStorage = JSON.parse(localStorage.getItem("items"));
+	searchStorage.push({'prop1': locationAddress, 'prop2': lonLocation, "prop3": latLocation});
+	localStorage.setItem("items", JSON.stringify(searchStorage));
+	
+	console.log(searchStorage);
 	// Center the map on the coordinates of clicked list item.
 	searchListItem.on('click', (e) => {
 		map.flyTo({
 		center: [searchListItem.data("lon"), searchListItem.data("lat")]
 		});
 	});
+	
 
 	console.log(locationTitle);
 	console.log(lonLocation);
