@@ -1,9 +1,40 @@
 let searchList = $("#previous-searches");
+searchStorage = JSON.parse(localStorage.getItem("pastSearches"));
+localStorage.setItem("pastSearches", null)
 
 // Assigning the apiKey variable to the API Key needed to access the data set
 let apiKey = "gPYdcAZ3x7dA2mYoq34XovsV4rz8IFvd"
 // Assigning querySize to the amount of events we want to pull from a page in the data set (currently the maximum value for the api is 1000 per page)
 let querySize = "50"
+
+
+	// Function which loads the past city searches to display when loading the page
+function pastSearches() {
+
+	// If statement checking if the cities array is already populated
+	if (searchStorage !== null) {
+		console.log(searchStorage);
+		$("h3").remove();
+		// For loop which will increment through the cities array to find each item inside of local storage
+		for (let i = 0; i < searchStorage.length; i++) {
+			// Assigning historyBtn a JQuery and text to match the city name of the cities inside of the cities array
+			let searchListItem = $('<h3>').data({"address": searchStorage[i].address, "lon": searchStorage[i].lon, "lat": searchStorage[i].lat});
+			searchListItem.text(searchStorage[i].address);
+			// Appending historyBtn to the search history list in the index.html
+			searchList.append(searchListItem);
+			searchListItem.on('click', (e) => {
+				map.flyTo({
+				center: [searchListItem.data("lon"), searchListItem.data("lat")]
+				});
+			});
+			}
+		// Exits the for loop
+		return;
+		}
+	searchStorage = [];
+}
+pastSearches();
+
 
 // Function which grabs data from the ticket master api
 function getData() {
@@ -124,23 +155,23 @@ map.on("load", async () => {
 	let locationAddress = results.result.place_name;
 
 	//Appends the searched items postal code to the list of previous searches
-	let searchListItem = $("<h3>").html(locationAddress).data({"lon": lonLocation, "lat": latLocation});
-	searchList.append(searchListItem);
+		searchListItem = $("<h3>").html(locationAddress).data({"lon": lonLocation, "lat": latLocation});
+
 	console.log("checking stuff: " + searchListItem.data("lon") + " // " + searchListItem.data("lat"))
 	
 
+
 	
-	let searchStorage = JSON.parse(localStorage.getItem("items"));
-	searchStorage.push({'prop1': locationAddress, 'prop2': lonLocation, "prop3": latLocation});
-	localStorage.setItem("items", JSON.stringify(searchStorage));
+
+	
+	searchStorage.push({'address': locationAddress, 'lon': lonLocation, "lat": latLocation});
+	localStorage.setItem("pastSearches", JSON.stringify(searchStorage));
+	pastSearches();
+
 	
 	console.log(searchStorage);
 	// Center the map on the coordinates of clicked list item.
-	searchListItem.on('click', (e) => {
-		map.flyTo({
-		center: [searchListItem.data("lon"), searchListItem.data("lat")]
-		});
-	});
+
 	
 
 	console.log(locationTitle);
