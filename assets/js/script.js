@@ -1,6 +1,10 @@
 let searchList = $("#previous-searches");
 searchStorage = JSON.parse(localStorage.getItem("pastSearches"));
-localStorage.setItem("pastSearches", null)
+
+if (localStorage = null) {
+	localStorage.setItem("pastSearches", null);
+}
+
 
 // Assigning the apiKey variable to the API Key needed to access the data set
 let apiKey = "gPYdcAZ3x7dA2mYoq34XovsV4rz8IFvd"
