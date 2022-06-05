@@ -1,5 +1,7 @@
 // Assigning searchList variable to the previous-searches id within the html, this is where the list items will populate
 let searchList = $("#previous-searches");
+// // Assigning recommendedList variable to the recommended-areas id within the html, this is where the pre-defined list items will populate
+let recommendedList = $("#recommended-areas")
 // Assigning searchStorage the value of whats currently stored in pastSearches local storage if it currently exists
 searchStorage = JSON.parse(localStorage.getItem("pastSearches"));
 
@@ -7,6 +9,7 @@ searchStorage = JSON.parse(localStorage.getItem("pastSearches"));
 if (localStorage = null) {
 	localStorage.setItem("pastSearches", null);
 }
+
 
 
 // Assigning the apiKey variable to the API Key needed to access the data set
@@ -133,6 +136,62 @@ const startMapBox = async (events) => {
 		center: [initLng, initLat], // Starting position [lng, lat]
 		zoom: 12, // Starting zoom level
 	});
+	
+
+	recommendedAreas = [
+		{
+			"address": "Scotiabank Arena",
+			"lon": -79.3791035,
+			"lat": 43.6433895
+		},
+		{
+			"address": "Ontario Place",
+			"lon": -79.41511374999999,
+			"lat": 43.62939075
+		},
+		{
+			"address": "Danforth Music Hall",
+			"lon": -79.357071,
+			"lat": 43.676338
+		}
+
+	];
+	// Function which displays recommended areas in a list for the user to click on and center the map to that location
+	function recommendedSearches() {
+
+		// If statement checking if recommendedAreas already has any value
+		if (recommendedAreas !== null) {
+			// For loop which will increment through the recommendedAreas array to find each item
+			for (let i = 0; i < recommendedAreas.length; i++) {
+				// Assigning recommendedListItem a JQuery with a data value object with the properties for address, longitude, and latitude for each item in the recommendedAreas array
+				let recommendedListItem = $('<h2>').data({"address": recommendedAreas[i].address, "lon": recommendedAreas[i].lon, "lat": recommendedAreas[i].lat});
+				// Assigning the text which will display on the list for the populated list item
+				recommendedListItem.text(recommendedAreas[i].address);
+				// Appending recommendedListItem to the recommendedList (#recommended-areas) in the index.html
+				recommendedList.append(recommendedListItem);
+
+				// Assigning each recommendedListItem the ability to be clicked on to re-center the map based on its longitude and latitude
+				recommendedListItem.on('click', (e) => {
+					// Makes the map re-center on a location
+					map.flyTo({
+					// Assigning the center value to the longitude and latitude of the data within recommendedListItem
+					center: [recommendedListItem.data("lon"), recommendedListItem.data("lat")],
+					// Assigning zoom level of the map once it re-centers to the recommendedListItem location
+					zoom: 15
+					});
+				});
+				}
+			// Exits the for loop
+			return;
+			}
+	}
+// Calls recommendedSearches function to display the recommended areas
+recommendedSearches();	
+
+
+
+
+
 
 	// Function which loads the past searches to display when loading the page
 	function pastSearches() {
