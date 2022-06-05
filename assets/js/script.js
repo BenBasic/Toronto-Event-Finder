@@ -28,41 +28,6 @@ const map = new mapboxgl.Map({
 	zoom: 12, // Starting zoom level
 });
 
-// Function which loads the past searches to display when loading the page
-function pastSearches() {
-
-	// If statement checking if searchStorage already has any value from the localStorage
-	if (searchStorage !== null) {
-		// Removes all <h3> tags from the html document so that the past search list clears before being loaded in this function
-		$("h3").remove();
-		// For loop which will increment through the search storage array to find each item inside of local storage
-		for (let i = 0; i < searchStorage.length; i++) {
-			// Assigning searchListItem a JQuery with a data value object with the properties for address, longitude, and latitude for each item in the localStorage
-			let searchListItem = $('<h3>').data({"address": searchStorage[i].address, "lon": searchStorage[i].lon, "lat": searchStorage[i].lat});
-			// Assigning the text which will display on the list for the populated list item
-			searchListItem.text(searchStorage[i].address);
-			// Appending searchListItem to the searchList (#previous-searches) in the index.html
-			searchList.append(searchListItem);
-
-			// Assigning each searchListItem the ability to be clicked on to re-center the map based on its longitude and latitude
-			searchListItem.on('click', (e) => {
-				// Makes the map re-center on a location
-				map.flyTo({
-				// Assigning the center value to the longitude and latitude of the data within searchListItem
-				center: [searchListItem.data("lon"), searchListItem.data("lat")]
-				});
-			});
-			}
-		// Exits the for loop
-		return;
-		}
-	// Assigning searchStorage to an empty array to avoid breaking the program if it detects a null value
-	searchStorage = [];
-}
-// Calls pastSearches function to load past searches and append them to the searchList
-pastSearches();
-
-
 
 // Function which grabs data from the ticket master api
 function getData() {
@@ -92,6 +57,7 @@ function getData() {
 
 			// Assigning eventData to the value of the events data set
 			let eventData = data._embedded.events;
+	
 
 			// For loop to increment through the events data array
 			for (i = 0; i < data._embedded.events.length; i++) {
@@ -144,6 +110,7 @@ function getData() {
 							eventStartDay: eventStartDay,
 							eventStartTime: eventStartTime,
 						});
+						console.log(events);
 					}
 				}
 			}
@@ -166,6 +133,41 @@ const startMapBox = async (events) => {
 		center: [initLng, initLat], // Starting position [lng, lat]
 		zoom: 12, // Starting zoom level
 	});
+
+	// Function which loads the past searches to display when loading the page
+	function pastSearches() {
+
+		// If statement checking if searchStorage already has any value from the localStorage
+		if (searchStorage !== null) {
+			// Removes all <h3> tags from the html document so that the past search list clears before being loaded in this function
+			$("h3").remove();
+			// For loop which will increment through the search storage array to find each item inside of local storage
+			for (let i = 0; i < searchStorage.length; i++) {
+				// Assigning searchListItem a JQuery with a data value object with the properties for address, longitude, and latitude for each item in the localStorage
+				let searchListItem = $('<h3>').data({"address": searchStorage[i].address, "lon": searchStorage[i].lon, "lat": searchStorage[i].lat});
+				// Assigning the text which will display on the list for the populated list item
+				searchListItem.text(searchStorage[i].address);
+				// Appending searchListItem to the searchList (#previous-searches) in the index.html
+				searchList.append(searchListItem);
+
+				// Assigning each searchListItem the ability to be clicked on to re-center the map based on its longitude and latitude
+				searchListItem.on('click', (e) => {
+					// Makes the map re-center on a location
+					map.flyTo({
+					// Assigning the center value to the longitude and latitude of the data within searchListItem
+					center: [searchListItem.data("lon"), searchListItem.data("lat")]
+					});
+				});
+				}
+			// Exits the for loop
+			return;
+			}
+		// Assigning searchStorage to an empty array to avoid breaking the program if it detects a null value
+		searchStorage = [];
+	}
+// Calls pastSearches function to load past searches and append them to the searchList
+pastSearches();
+
 
 	map.on("load", async () => {
 		const tileset = "zzzbia.ahqydxq2"; // replace this with the ID of the tileset you created (this is my tile data set from mapbox)
