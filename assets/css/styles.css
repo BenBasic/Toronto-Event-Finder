@@ -34,5 +34,9 @@ body {
 
 .mapboxgl-popup-content {
     text-align: center;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Poppins', 'Roboto', sans-serif;
+}
+
+#headingPopup {
+    text-decoration: underline;
 }

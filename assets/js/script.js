@@ -67,8 +67,12 @@ function getData() {
 					let eventURL = eventData[i].url;
 					// Assigning venueNameData to the value of the events data set venue name
 					let venueNameData = eventData[i]._embedded.venues[0].name;
+					// Assigning  featureImage to the value of events data image from the url of where the user can buy a ticket
 					let featureImage = eventData[i].images[0].url;
-					// Console logs to log the desired data of the data set for things such as the event title, the geo location of the event, etc
+					// Starting day of the event
+					let eventStartDay = eventData[i].dates.start.localDate;
+					// Starting Time of the event
+					let eventStartTime = eventData[i].dates.start.localTime;
 
 					if (
 						latData &&
@@ -83,6 +87,8 @@ function getData() {
 							title: eventTitleData,
 							url: eventURL,
 							featureImage: featureImage,
+							eventStartDay: eventStartDay,
+							eventStartTime: eventStartTime,
 						});
 					}
 				}
@@ -117,7 +123,7 @@ const startMapBox = async (events) => {
 			accessToken: mapboxgl.accessToken, // Set the access token
 			mapboxgl: mapboxgl, // Set the mapbox-gl instance
 			zoom: 13, // Set the zoom level for geocoding results
-			placeholder: "Enter an address or place name", // This placeholder text will display in the search bar
+			placeholder: "   Enter an address or place name", // This placeholder text will display in the search bar (extra space in the start to prevent search icon and text from overlapping)
 			bbox: [-180, -90, 180, 90], // Set a bounding box (for Toronto, this is still be way too big/broad)
 			country: "CA", //Set the country for geocoding results
 		});
@@ -125,7 +131,7 @@ const startMapBox = async (events) => {
 		// Add the geocoder to the map
 		map.addControl(geocoder, "top-left"); // Add the search box to the top left
 
-		const marker = new mapboxgl.Marker({ color: "#da373d" }); // Create a new green marke
+		const marker = new mapboxgl.Marker({ color: "#da373d" }); // Create a red marker
 
 		// marker.setLngLat(point).addTo(map); // Add the marker to the map at the result coordinates
 
@@ -210,9 +216,11 @@ const startMapBox = async (events) => {
 			maboxMarker.setPopup(
 				new mapboxgl.Popup({ offset: 25 }) // add popups
 					.setHTML(
-						`<h3>${events[i].title}</h3>
-						<img src="${events[i].featureImage}">
-						<a href="${events[i].url}" target="_blank"> Book Now</a>`
+						`<h3  id="headingPopup" class="text-sky-500 font-bold ;hover:text-sky-600 font-bold ">${events[i].title}</h3>
+						<img class="rounded drop-shadow-md" src="${events[i].featureImage}">
+						<p>${events[i].eventStartDay}</p>
+						<p>${events[i].eventStartTime}</p>
+						<a class=" border border-sky-600  text-l rounded-lg bg-sky-500 p-1 font-bold shadow-lg shadow-indigo-500/40 hover:opacity-90 hover:text-white" href="${events[i].url}" target="_blank"> Book Now</a>`
 					)
 			);
 
