@@ -357,12 +357,16 @@ const startMapBox = async (events) => {
 			maboxMarker.setPopup(
 				new mapboxgl.Popup({ offset: 25 }) // add popups
 					.setHTML(
-						`<h3  id="headingPopup" class="text-sky-500 font-bold ;hover:text-sky-600 font-bold ">${events[i].title}</h3>
+						`<h3  id="headingPopup" class="text-sky-500 font-bold ;hover:text-sky-600 font-bold ">${
+							events[i].title
+						}</h3>
 						<img class="rounded drop-shadow-md" src="${events[i].featureImage}">
 						<p>${events[i].venueNameData} </p>
 						<p>${events[i].eventStartDay}</p>
-						<p>${events[i].eventStartTime}</p>
-						<a class=" border border-sky-600  text-l rounded-lg bg-sky-500 p-1 font-bold shadow-lg shadow-indigo-500/40 hover:opacity-90 hover:text-white" href="${events[i].url}" target="_blank"> Book Now</a>`
+						<p>${events[i].eventStartTime || ""}</p>
+						<a class=" border border-sky-600  text-l rounded-lg bg-sky-500 p-1 font-bold shadow-lg shadow-indigo-500/40 hover:opacity-90 hover:text-white" href="${
+							events[i].url
+						}" target="_blank"> Book Now</a>`
 					)
 			);
 
@@ -373,11 +377,16 @@ const startMapBox = async (events) => {
 	});
 };
 
+// function showEventList takes a paramater called events
 function showEventList(events) {
-	// return;
+	// slicing events array to only showing top 5 events from array
+	const topEvents = events.slice(0, 5);
+	//getting the element id event=list
 	const eventList = document.getElementById("event-list");
-	events.forEach((event) => {
+	// for each top event then create element div
+	topEvents.forEach((event) => {
 		const eventListItem = document.createElement("div");
+		// Creating event list items with styling
 		eventListItem.innerHTML = `                  
 				<div class="w-full py-1 border-t border-b border-cyan-200 flex flex-nowrap">
 				<div class="w-1/4">
@@ -385,8 +394,12 @@ function showEventList(events) {
 						src="${event.featureImage}">
 				</div>
 				<div class="w-3/4 px-2">
-					<h1 class="text-xl font-bold font-pop text-2xl font-bold text-cyan-500">${event.title}</h1>
+					<h1 class="text-xl font-bold font-pop text-2xl font-bold text-cyan-500">${
+						event.title
+					}</h1>
 					<h2>${event.venueNameData}</h2>
+					<p>${event.eventStartDay}</p>
+					<p>${event.eventStartTime || ""}</p>
 				</div>
 			</div>`;
 		eventList.appendChild(eventListItem);
