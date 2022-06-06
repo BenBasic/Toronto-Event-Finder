@@ -38,8 +38,7 @@
 - [References](#References)
 
 ## 🖼️ Images and Screenshots
- ![WelcomePage](INSERT_LINK)
- ![QuestionScreen](INSERT_LINK)
+ ![Screenshot](assets/images/screenshot.png)
 
 
 ## Deployed Link
