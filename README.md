@@ -16,7 +16,7 @@
 - When the Map Loads, The uset finds themselves looking at the Map of Toronto
    - The yellow markers on the map are dispalyed as locations for near by public washrooms
    - The blue markers on the map are locations for upcoming events in Toronto
-- Search Location will display results of searches within the map
+   - Search Location will display results of searches within the map
    - Searched Locations will display on the side
    - Clicking on the previous search results will return reroute user to the previous searched location 
    - User is able to clear previous Locally Stored Searches
@@ -38,12 +38,11 @@
 - [References](#References)
 
 ## 🖼️ Images and Screenshots
- ![WelcomePage](INSERT_LINK)
- ![QuestionScreen](INSERT_LINK)
+ ![Screenshot](assets/images/screenshot.png)
 
 
 ## Deployed Link
- - [Try out the Toronto Event Finder](INSERT_LINK/)
+ - [Try out the Toronto Event Finder](https://benbasic.github.io/Toronto-Event-Finder/)
  
 ## Wireframe
 - [Figma Wireframe](https://www.figma.com/file/RZhzRnK6eMB49M3BBlxbzu/Toronto-Healthy-Food-Finder?node-id=0%3A1)
