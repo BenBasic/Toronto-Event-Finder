@@ -41,3 +41,13 @@ body {
 #headingPopup {
     text-decoration: underline;
 }
+
+#past-search-container {
+    display: none;
+}
+
+.mapboxgl-popup-close-button {
+    border-color: cyan;
+    border-radius: 10px;
+    padding: 5px;
+}

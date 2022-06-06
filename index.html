@@ -10,9 +10,6 @@
     <link rel='stylesheet'
         href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css'
         type='text/css' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js'></script>
-    <script
-        src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,45 +17,59 @@
         href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700&family=Lato:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,700;1,800&family=Roboto:wght@300;400;500&display=swap"
         rel="stylesheet">
     <script src="tailwind.config.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-        crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-        crossorigin=""></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=Poppins:wght@100&display=swap" rel="stylesheet">
-
-</head>
-
-<body class="container mx-auto overflow-scroll">
-    <header class="py-2 group">
-        <nav
-            class="container drop-shadow-md mx-auto bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:to-red-100 py-4 px-2 rounded-xl overflow-hidden">
-            <a class="text-xl lg:text-3xl font-bold text-white group-hover:opacity-90 font-pop" href="#">Toronto
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=Poppins:wght@100&display=swap"
                 Event Finder</a>
+            <a href="#event-list"></a>
         </nav>
     </header>
 
-    <div class="flex flex-col md:flex-row w-full lg:flex-nowrap">
-        <div class="flex-1 w-64 min-h-full flex-shrink-0 px-2">
-            <div class="w-full bg-white py-4 px-2 border-slate-300 border-width border border-solid rounded-md">
-                <h1 class="font-robot text-2xl font-bold text-cyan-700">Search Location</h1>
+    <div class="flex md:flex-row w-full lg:flex-nowrap ">
+        <div class="lg:flex-1 w-full lg:w-64 min-h-full flex-shrink-0 px-2">
+            <!-- <div class="w-full bg-white py-4 px-2 border-slate-300 border-width border border-solid rounded-md">
+                <h1 class="font-pop text-2xl font-bold text-cyan-700">Search Location</h1>
 
-            </div>
+            </div> -->
+            <section class="my-3 rounded-xl border  px-2 py-3  shadow-md shadow-blue-500/40 ">
+                <h2 class="font-pop text-2xl lg:text-3xl font-bold text-cyan-700 my-3"> Recommended Areas</h2>
+                <hr>
+                <ul id="recommended-areas">
 
-            <div id="previous-searches">
+                </ul>
+            </section>
+            <section id="past-search-container" class="my-3 rounded-xl border  px-2 py-3 shadow-md shadow-blue-500/40 ">
+                <div class="flex  flex-row space-between min-w-full">
+                    <div class="flex-grow-1 flex-1">
+                        <h2 class="font-pop text-2xl lg:text-3xl font-bold text-cyan-700"> Past Searches
+                        </h2>
+                        <hr>
+                    </div>
+                    <div class="flex justify-end align-center" id="clear-past-searches">
 
+                    </div>
+                </div>
+                <div id="previous-searches" class="flex flex-col"></div>
+            </section>
+
+            <section class="border rounded-xl px-3 py-4 shadow-md shadow-blue-500/40 ">
+                <h2 class="font-bold font-pop text-2xl lg:text-3xl font-bold text-cyan-700 my-3 ">Upcoming Events</h2>
+                <div id="event-list">
+
+                </div>
+            </section>
+        </div>
+
+        <div
+            class="flex-1 w-full lg:w-auto  overflow-hidden lg:max-h-[90vh] lg:min-h-[80vh] rounded-lg relative  lg:sticky lg:top-10  lg:self-start	 ">
+            <div class="" id="map">
             </div>
 
         </div>
+    </div>
 
-        <div class="flex-1 w-full lg:w-auto min-h-[80vh] relative rounded-lg   ">
 
-            <div class="" id='map'></div>
-        </div>
 
        
     </div>
@@ -68,13 +79,17 @@
     pointer to book/register and have a blast!</p> </div>
     <div>
         <img src="assets\images\pexels-luis-ruiz-1292843.jpg" class="drop-shadow-lg flex flex-col md:flex-row rounded-lg alt="Toronto by Luis Ruiz"></div>
-    
-
 
 </body>
+
+<!-- https://s1.ticketm.net/dam/c/03e/e15ef00f-2c87-4421-ae61-d740851a703e_105891_RETINA_PORTRAIT_16_9.jpg -->
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js'></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
-<script src="./assets/js/script.js"></script>
+<script src="./assets/js/script.js" defer></script>
 
 </html>
