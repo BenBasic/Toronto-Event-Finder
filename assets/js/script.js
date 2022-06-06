@@ -116,7 +116,6 @@ function getData() {
 			}
 			if (events.length) {
 				startMapBox(events);
-				showEventList(events);
 			} else {
 				alert("No events found in your area");
 			}
@@ -165,6 +164,10 @@ const startMapBox = async (events) => {
 					lat: recommendedAreas[i].lat,
 				});
 
+				recommendedListItem.addClass(
+					"text-xl cursor-pointer hover:text-cyan-700"
+				);
+
 				// Assigning the text which will display on the list for the populated list item
 				recommendedListItem.text(recommendedAreas[i].address);
 
@@ -196,6 +199,31 @@ const startMapBox = async (events) => {
 	function pastSearches() {
 		// If statement checking if searchStorage already has any value from the localStorage
 		if (searchStorage !== null) {
+			document.getElementById("past-search-container").style.display = "block";
+
+			if (!document.getElementById("clear-btn")) {
+				const clearLocalStorageBtn = document.createElement("span");
+				clearLocalStorageBtn.id = "clear-btn";
+				clearLocalStorageBtn.className = "mx-auto my-auto cursor-pointer group";
+				clearLocalStorageBtn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24"
+							class="fill-[#3A485F] group-hover:fill-red-400" fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+							<rect x="15.7427" y="6.55029" width="1" height="13"
+								transform="rotate(45 15.7427 6.55029)" />
+							<rect x="16.4497" y="15.7427" width="1" height="13"
+								transform="rotate(135 16.4497 15.7427)" />
+						</svg>`;
+
+				clearLocalStorageBtn.addEventListener("click", () => {
+					window.localStorage.clear();
+					document.getElementById("past-search-container").style.display =
+						"none";
+				});
+
+				document
+					.getElementById("clear-past-searches")
+					.appendChild(clearLocalStorageBtn);
+			}
 			// Removes all <h3> tags from the html document so that the past search list clears before being loaded in this function
 			$("h3").remove();
 			// For loop which will increment through the search storage array to find each item inside of local storage
@@ -210,7 +238,7 @@ const startMapBox = async (events) => {
 				searchListItem.text(searchStorage[i].address);
 				// Appending searchListItem to the searchList (#previous-searches) in the index.html
 				searchList.append(searchListItem);
-
+				searchListItem.addClass("text-xl cursor-pointer hover:text-cyan-700");
 				// Assigning each searchListItem the ability to be clicked on to re-center the map based on its longitude and latitude
 				searchListItem.on("click", (e) => {
 					// Makes the map re-center on a location
@@ -361,10 +389,12 @@ const startMapBox = async (events) => {
 							events[i].title
 						}</h3>
 						<img class="rounded drop-shadow-md" src="${events[i].featureImage}">
-						<p>${events[i].venueNameData} </p>
-						<p>${events[i].eventStartDay}</p>
-						<p>${events[i].eventStartTime || ""}</p>
-						<a class=" border border-sky-600  text-l rounded-lg bg-sky-500 p-1 font-bold shadow-lg shadow-indigo-500/40 hover:opacity-90 hover:text-white" href="${
+						<p class="text-cyan-900 font-medium"> Location: ${events[i].venueNameData} </p>
+						<p class="text-cyan-900 font-medium"> Playing on: ${events[i].eventStartDay}</p>
+						<p class="text-cyan-900 font-medium" Start Time: ${
+							events[i].eventStartTime || ""
+						}</p>
+						<a class=" border border-sky-600  text-l rounded-lg bg-sky-500 p-1 font-bold shadow-lg shadow-blue-500/40 hover:opacity-90 hover:text-white" href="${
 							events[i].url
 						}" target="_blank"> Book Now</a>`
 					)
@@ -374,37 +404,46 @@ const startMapBox = async (events) => {
 
 			// console.log(maboxMarker);
 		}
+		// function showEventList takes a paramater called events
+		function showEventList() {
+			// slicing events array to only showing top 5 events from array
+			const topEvents = events.slice(0, 5);
+			//getting the element id event=list
+			const eventList = document.getElementById("event-list");
+			// for each top event then create element div
+			topEvents.forEach((event) => {
+				const eventListItem = document.createElement("div");
+				// Creating event list items with styling
+				eventListItem.innerHTML = `                  
+					<div class="w-full py-3 border-t border-b border-black border-opacity-10 flex flex-nowrap cursor-pointer hover:opacity-80">
+					<div class="w-1/4">
+						<img class="object-contain w-full rounded-xl overflow-hidden"
+							src="${event.featureImage}">
+					</div>
+					<div class="w-3/4 px-2">
+						<h1 class="text-xl font-bold font-pop text-2xl font-bold text-cyan-600">${
+							event.title
+						}</h1>
+						<h2>${event.venueNameData}</h2>
+						<p>${event.eventStartDay}</p>
+						<p>${event.eventStartTime || ""}</p>
+					</div>
+				</div>`;
+
+				eventListItem.addEventListener("click", () => {
+					map.flyTo({
+						// Assigning the center value to the longitude and latitude of the data within recommendedListItem
+						center: [event.lon, event.lat],
+						// Assigning zoom level of the map once it re-centers to the recommendedListItem location
+						zoom: 15,
+					});
+				});
+				eventList.appendChild(eventListItem);
+			});
+		}
+		showEventList();
 	});
 };
-
-// function showEventList takes a paramater called events
-function showEventList(events) {
-	// slicing events array to only showing top 5 events from array
-	const topEvents = events.slice(0, 5);
-	//getting the element id event=list
-	const eventList = document.getElementById("event-list");
-	// for each top event then create element div
-	topEvents.forEach((event) => {
-		const eventListItem = document.createElement("div");
-		// Creating event list items with styling
-		eventListItem.innerHTML = `                  
-				<div class="w-full py-1 border-t border-b border-cyan-200 flex flex-nowrap">
-				<div class="w-1/4">
-					<img class="object-contain w-full rounded-xl overflow-hidden"
-						src="${event.featureImage}">
-				</div>
-				<div class="w-3/4 px-2">
-					<h1 class="text-xl font-bold font-pop text-2xl font-bold text-cyan-500">${
-						event.title
-					}</h1>
-					<h2>${event.venueNameData}</h2>
-					<p>${event.eventStartDay}</p>
-					<p>${event.eventStartTime || ""}</p>
-				</div>
-			</div>`;
-		eventList.appendChild(eventListItem);
-	});
-}
 
 // Calling the getData function
 

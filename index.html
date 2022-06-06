@@ -21,36 +21,45 @@
 
 </head>
 
-<body class="container mx-auto overflow-auto">
+<body class="container mx-auto overflow-auto font-pop bg-[#f2f6ff]">
     <header class="py-2 group">
         <nav
-            class="container drop-shadow-md mx-auto bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:to-red-100 py-4 px-2 rounded-xl overflow-hidden">
-            <a class="text-xl lg:text-2xl font-bold text-white group-hover:opacity-90 font-pop" href="#">Toronto
+            class="container drop-shadow-md mx-auto bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:to-red-100 py-6 px-6 rounded-2xl overflow-hidden">
+            <a class="text-4xl lg:text-4xl font-bold text-white group-hover:opacity-90 font-pop" href="#">Toronto
                 Event Finder</a>
+            <a href="#event-list"></a>
         </nav>
     </header>
 
     <div class="flex md:flex-row w-full lg:flex-nowrap ">
         <div class="lg:flex-1 w-full lg:w-64 min-h-full flex-shrink-0 px-2">
-            <div class="w-full bg-white py-4 px-2 border-slate-300 border-width border border-solid rounded-md">
+            <!-- <div class="w-full bg-white py-4 px-2 border-slate-300 border-width border border-solid rounded-md">
                 <h1 class="font-pop text-2xl font-bold text-cyan-700">Search Location</h1>
 
-            </div>
-            <section class="my-3 rounded-xl border border-slate-300 px-2 py-3 rounded drop-shadow-md">
-                <h2 class="font-pop text-2xl font-bold text-cyan-700"> Recommended Areas: </h2>
+            </div> -->
+            <section class="my-3 rounded-xl border  px-2 py-3  shadow-md shadow-blue-500/40 ">
+                <h2 class="font-pop text-2xl lg:text-3xl font-bold text-cyan-700 my-3"> Recommended Areas</h2>
+                <hr>
                 <ul id="recommended-areas">
 
                 </ul>
-
             </section>
-            <section class="my-3 rounded-xl border border-slate-300 px-2 py-3 rounded drop-shadow-md">
-                <h2 class="font-pop text-2xl font-bold text-cyan-700"> Past Searches
-                </h2>
-                <div id="previous-searches"></div>
+            <section id="past-search-container" class="my-3 rounded-xl border  px-2 py-3 shadow-md shadow-blue-500/40 ">
+                <div class="flex  flex-row space-between min-w-full">
+                    <div class="flex-grow-1 flex-1">
+                        <h2 class="font-pop text-2xl lg:text-3xl font-bold text-cyan-700"> Past Searches
+                        </h2>
+                        <hr>
+                    </div>
+                    <div class="flex justify-end align-center" id="clear-past-searches">
+
+                    </div>
+                </div>
+                <div id="previous-searches" class="flex flex-col"></div>
             </section>
 
-            <section>
-                <h2 class="text-2xl font-bold ">Events</h2>
+            <section class="border rounded-xl px-3 py-4 shadow-md shadow-blue-500/40 ">
+                <h2 class="font-bold font-pop text-2xl lg:text-3xl font-bold text-cyan-700 my-3 ">Upcoming Events</h2>
                 <div id="event-list">
 
                 </div>
