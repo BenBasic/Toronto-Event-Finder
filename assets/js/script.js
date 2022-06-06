@@ -75,7 +75,7 @@ function getData() {
 				let cancelledCheck = eventData[i].dates.status.code;
 
 				// If statement to check if dateCheck is true, and if cancelledCheck is equal to onsale
-				if ((dateCheck, cancelledCheck === "onsale")) {
+				if (dateCheck && cancelledCheck === "onsale") {
 					// Assigning latData to the value of the events data set latitude
 					let latData = eventData[i]._embedded.venues[0].location.latitude;
 					// Assigning lonData to the value of the events data set longitude

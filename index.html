@@ -16,22 +16,22 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700&family=Lato:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,700;1,800&family=Roboto:wght@300;400;500&display=swap"
         rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="tailwind.config.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="tailwind.config.js"></script>
 
 </head>
 
 <body class="container mx-auto overflow-auto font-pop bg-[#f2f6ff]">
     <header class="py-2 group">
         <nav
-            class="container drop-shadow-md mx-auto bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:to-red-100 py-6 px-6 rounded-2xl overflow-hidden">
+            class="container drop-shadow-md mx-auto bg-gradient-to-r from-cyan-500 to-blue-500 py-6 px-6 rounded-2xl overflow-hidden">
             <a class="text-4xl lg:text-4xl font-bold text-white group-hover:opacity-90 font-pop" href="#">Toronto
                 Event Finder</a>
         </nav>
     </header>
 
-    <div class="flex md:flex-row w-full lg:flex-nowrap ">
-        <div class="lg:flex-1 w-full lg:w-64 min-h-full flex-shrink-0 px-2">
+    <div class="md:flex md:flex-row w-full lg:flex-nowrap ">
+        <div class="lg:flex-1 w-full lg:w-64  flex-shrink-0 px-2">
 
             <section class="my-3 rounded-xl border  px-2 py-3  shadow-md shadow-blue-500/40 ">
                 <h2 class="font-pop text-2xl lg:text-3xl font-bold text-cyan-700 my-3"> Recommended Areas</h2>
@@ -63,24 +63,28 @@
         </div>
 
         <div
-            class="flex-1 w-full lg:w-auto  overflow-hidden lg:max-h-[90vh] lg:min-h-[80vh] rounded-lg relative  lg:sticky lg:top-10  lg:self-start	 ">
-            <div class="" id="map">
+            class="flex-1 w-[100vw] lg:w-auto h-[50vh] lg:w-auto overflow-hidden h-[90vh] rounded-lg relative  lg:sticky lg:top-10  lg:self-start	 ">
+            <div class="md:absolute top-0 bottom-0 w-full h-full" id="map">
             </div>
 
         </div>
     </div>
 
-    <div><p class="font-bold text-[#154c79] text-xl text-center ml-6 mr-6 mt-6 mb-6">
-        Welcome to Toronto's activities with our Event Finder App. To begin, just enter your location in the search box and watch as our application lists all Ticketmaster events nearby.  Blue pointers list events and orange dots list restroom locations nearby. Just click on a blue
-    pointer to book/register and have a blast!</p> </div>
     <div>
-        <img src="assets\images\pexels-luis-ruiz-1292843.jpg" class="drop-shadow-lg flex flex-col md:flex-row rounded-lg" alt="Toronto by Luis Ruiz"></div>
+        <p class="font-bold text-[#154c79] text-xl text-center ml-6 mr-6 mt-6 mb-6">
+            Welcome to Toronto's activities with our Event Finder App. To begin, just enter your location in the search
+            box and watch as our application lists all Ticketmaster events nearby. Blue pointers list events and orange
+            dots list restroom locations nearby. Just click on a blue
+            pointer to book/register and have a blast!</p>
+    </div>
+    <div>
+        <img src="assets\images\pexels-luis-ruiz-1292843.jpg"
+            class="drop-shadow-lg flex flex-col md:flex-row rounded-lg w-full h-auto" alt="Toronto by Luis Ruiz">
+    </div>
 
 
 
 </body>
-
-<!-- https://s1.ticketm.net/dam/c/03e/e15ef00f-2c87-4421-ae61-d740851a703e_105891_RETINA_PORTRAIT_16_9.jpg -->
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js'></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
 

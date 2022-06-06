@@ -4,7 +4,7 @@ body {
     overflow: hidden;
 }
 
-#map {
+/* #map {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -17,6 +17,11 @@ body {
     border-radius: 50%;
     border: 1px solid gray;
     background-color: lightblue;
+} */
+
+.mapboxgl-map {
+    min-width: 500px !important;
+    min-height: 500px !important;
 }
 
 .marker {
