@@ -13,7 +13,7 @@ if ((localStorage = null)) {
 // Assigning the apiKey variable to the API Key needed to access the data set
 let apiKey = "gPYdcAZ3x7dA2mYoq34XovsV4rz8IFvd";
 // Assigning querySize to the amount of events we want to pull from a page in the data set (currently the maximum value for the api is 1000 per page)
-let querySize = "50";
+let querySize = "200";
 
 const mapBoxKey =
 	"pk.eyJ1Ijoienp6YmlhIiwiYSI6ImNsM3ZubXB0djJuc2UzZGw4NHBscnltb3IifQ.DW29ynZDDnPeH6hmtl8O8g"; // set the access token
@@ -92,7 +92,7 @@ function getData() {
 					let eventStartDay = eventData[i].dates.start.localDate;
 					// Starting Time of the event
 					let eventStartTime = eventData[i].dates.start.localTime;
-
+					console.log(dateCheck);
 					if (
 						latData &&
 						lonData &&
