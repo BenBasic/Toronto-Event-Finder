@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-family: 'Poppins', 'Roboto', sans-serif;
 }
 
 #map {
@@ -34,7 +35,7 @@ body {
 
 .mapboxgl-popup-content {
     text-align: center;
-    font-family: 'Red_Hat_Display', 'Roboto', sans-serif;
+    font-family: 'Poppins', 'Roboto', sans-serif;
 }
 
 #headingPopup {
