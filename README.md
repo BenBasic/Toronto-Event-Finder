@@ -5,7 +5,7 @@
    The Toronto Event-Finder app locates near by events in Toronto! It presents a map of Upcoming Event options by guiding users with a visualization of marked event locations.
 
 
-## User Story
+## 👥User Story
 - User wants to be able to find events in TO
 - User wants to be able to view the event location, name of the event and the date and time
 - The marked event location allows the user to be riderected to book tickets for the event
@@ -29,10 +29,14 @@
 
 ## 📜Table of Contents
 - [Description](#description)
+- [User Story](#👥user-story)
+- [Expectations](#expectations)
+- [Task List](#task-list)
 - [Images and Screenshots](#images-and-screenshots)
 - [Deployed Link](#deployed-Link)
 - [Wireframe](#wireframe)
 - [References](#References)
+
 ## 🖼️ Images and Screenshots
  ![WelcomePage](INSERT_LINK)
  ![QuestionScreen](INSERT_LINK)
@@ -50,3 +54,6 @@
 - [MapBox Tilequery API](https://docs.mapbox.com/api/maps/tilequery/)
 - [MapBox GeoCoding API](https://docs.mapbox.com/api/search/geocoding/)
 - [TicketMaster API](https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/)
+- [Pexels Toronto](https://www.pexels.com/search/toronto/)
+- [Huemint](https://huemint.com/brand-3/#palette=fefefe-232b2f-295472-38af83)
+
